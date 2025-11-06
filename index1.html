@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest</title>
+    <link href="https://s.pinimg.com/webapp/favicon_48x48-7470a30d.png" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            transition: all 0.3s;
+        }
+
+        nav {
+            width: 100%;
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 5px 8px 1px rgba(128, 128, 128, 0.593);
+            position: fixed;
+            top: 0;
+            background-color: white;
+            z-index: 1000;
+        }
+
+        .left {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 1px;
+        }
+
+        .left>img {
+            width: 140px;
+            height: 100%;
+            object-fit: contain;
+        }
+        .left>button {
+            padding: 15px 20px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bolder;
+        }
+        .left>button:hover {
+            background-color: lightgray;
+            border-radius: 24px;
+        }
+        .right {
+            width: 40%;
+            height: 100%;
+            display: flex;
+        }
+
+        .navlist {
+            width: 65%;
+            height: 100%;
+        }
+        .navlist>ul {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: space-around;
+            text-transform: capitalize;
+            font-size: 14px;
+            font-weight: bold;
+            list-style: none;
+        }
+        .navlist>ul>li>a {
+            color: #335F75;
+            text-decoration: none;
+        }
+        .navlist>ul>li>a:hover {
+            text-decoration: underline;
+        }
+        .btns {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .btns>button {
+            padding: 13px 20px;
+            border-radius: 15px;
+            font-size: 14px;
+            text-transform: capitalize;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+        .btns>button:nth-child(1) {
+            background-color: #e20829;
+            color: white;
+        }
+        .btns>button:nth-child(1):hover {
+            background-color:#920419;
+        }
+        .btns>button:nth-child(2) {
+            background-color: #CDCDC1;
+        }
+        .btns>button:nth-child(2):hover {
+            background-color: #909088;
+        }
+
+        #login, #register, #about, #business, #create, #news {
+            width: 100%;
+            height: 700px;
+            background-image: url("https://storage.googleapis.com/turbocollage-res/assets/images/blog/collage-examples/photo-pile.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            margin-top: 78px;
+        }
+        #login>.logintext, #register>.registertext, #about>.abouttext, 
+        #business>.businesstext, #create>.createtext, #news>.newstext {
+            width: 60%;
+            height: 100%;
+            background-color: rgba(5, 5, 5, 0.526);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            padding: 0px 100px;
+        }
+        .logintext>h1, .registertext>h1, .abouttext>h1, 
+        .businesstext>h1, .createtext>h1, .newstext>h1 {
+            width: 70%;
+            color: white;
+        }
+
+        #login>.loginform, #register>.registerform, #about>.aboutcontent, 
+        #business>.businesscontent, #create>.createcontent, #news>.newscontent {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(5, 5, 5, 0.526);
+        }
+
+        .loginform>form, .registerform>form {
+            width: 75%;
+            height: 80%;
+            border-radius: 40px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .loginform>form>.inputbox, .registerform>form>.inputbox {
+            width: 50%;
+            height: 14%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .inputbox>label {
+            font-size: small;
+        }
+        .inputbox>input {
+            width: 100%;
+            height: 60%;
+            background-color: white;
+            border-radius: 15px;
+            border: 1px solid black;
+            padding: 0 10px;
+        }
+        .inputbox>input:focus {
+            outline: 1px solid blue;
+        }
+        .loginform>form>a, .registerform>form>a {
+            width: 50%;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+        .btn {
+            width: 50%;
+            height: 20%;
+        }
+        .btn>button:nth-child(1) {
+            width: 100%;
+            height: 30%;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            background-color: #e20829;
+            cursor: pointer;
+        }
+        .btn>h5 {
+            text-align: center;
+            margin: 10px;
+        }
+        .btn>button:nth-child(3) {
+            width: 100%;
+            height: 30%;
+            border: none;
+            color: white;
+            background-color: royalblue;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .toggle-form {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .toggle-form a {
+            color: #e20829;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .toggle-form a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Hide other sections by default */
+        #register, #board, #about, #business, #create, #news {
+            display: none;
+        }
+
+        /* Content pages styling */
+        .aboutcontent, .businesscontent, .createcontent, .newscontent {
+            width: 75%;
+            height: 80%;
+            border-radius: 40px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+            padding: 40px;
+        }
+        .aboutcontent h2, 
+        .businesscontent h2, 
+        .createcontent h2, 
+        .newscontent h2,
+        .aboutcontent p, 
+        .businesscontent p, 
+        .createcontent p, 
+        .newscontent p,
+        .aboutcontent ul li, 
+        .businesscontent ul li, 
+        .createcontent ul li, 
+        .newscontent ul li {
+            color: #f9f8f8; /* Pinterest dark blue */
+}
+
+        .aboutcontent h2, .businesscontent h2, .createcontent h2, .newscontent h2 {
+            color: #e20829;
+            margin-bottom: 20px;
+        }
+
+        .aboutcontent p, .businesscontent p, .createcontent p, .newscontent p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* Board Page Styles */
+        #board {
+            margin-top: 78px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            min-height: calc(100vh - 78px);
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 12px 20px;
+            border-radius: 24px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #e20829;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .pins-container {
+            columns: 5 240px;
+            column-gap: 15px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .pin {
+            display: inline-block;
+            margin-bottom: 15px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            break-inside: avoid;
+        }
+
+        .pin:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .pin img {
+            width: 100%;
+            display: block;
+        }
+
+        .pin .pin-info {
+            padding: 10px;
+        }
+
+        .pin .pin-info h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .pin .pin-info p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .add-pin {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e20829;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .add-pin:hover {
+            background-color: #c50722;
+        }
+
+        .logout-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            padding: 10px 20px;
+            border-radius: 24px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #111;
+        }
+
+        /* Modal for adding new pin */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 16px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: #e20829;
+        }
+
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .modal-content button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background-color: #e20829;
+            color: white;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #c50722;
+        }
+
+        .close-modal {
+            float: right;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        /* Alert message */
+        .alert {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 30px;
+            background-color: #e20829;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1100;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Alert message -->
+    <div class="alert" id="alertMessage"></div>
+
+    <!-- navigation bar code -->
+    <nav>
+        <div class="left">
+            <img src="mainlogo.png" alt="Pinterest Logo" id="mainLogo">
+            <button id="exploreBtn">Explore</button>
+        </div>
+        <div class="right">
+            <div class="navlist">
+                <ul>
+                    <li><a href="#" id="aboutLink">About</a></li>
+                    <li><a href="#" id="businessLink">Business</a></li>
+                    <li><a href="#" id="createLink">Create</a></li>
+                    <li><a href="#" id="newsLink">News</a></li>
+                </ul>
+            </div>
+            <div class="btns">
+                <button id="loginBtn">Login</button>
+                <button id="signupBtn">Signup</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- login page code -->
+    <section id="login">
+        <!-- Your existing HTML remains the same -->
+        <div class="logintext">
+            <h1>Login to get your Ideas</h1>
+        </div>
+        <div class="loginform">
+            <form id="loginForm">
+                <svg aria-labelledby="fullpage-modal-pinterest-logo" height="40" role="img" viewBox="-3 -3 82 82" width="40" style="display: block;"><title id="fullpage-modal-pinterest-logo">Pinterest logo</title><circle cx="38" cy="38" fill="red" r="40"></circle><path d="M27.5 71c3.3 1 6.7 1.6 10.3 1.6C57 72.6 72.6 57 72.6 37.8 72.6 18.6 57 3 37.8 3 18.6 3 3 18.6 3 37.8c0 14.8 9.3 27.5 22.4 32.5-.3-2.7-.6-7.2 0-10.3l4-17.2s-1-2-1-5.2c0-4.8 3-8.4 6.4-8.4 3 0 4.4 2.2 4.4 5 0 3-2 7.3-3 11.4C35.6 49 38 52 41.5 52c6.2 0 11-6.6 11-16 0-8.3-6-14-14.6-14-9.8 0-15.6 7.3-15.6 15 0 3 1 6 2.6 8 .3.2.3.5.2 1l-1 3.8c0 .6-.4.8-1 .4-4.4-2-7-8.3-7-13.4 0-11 7.8-21 22.8-21 12 0 21.3 8.6 21.3 20 0 12-7.4 21.6-18 21.6-3.4 0-6.7-1.8-7.8-4L32 61.7c-.8 3-3 7-4.5 9.4z" fill="white" fill-rule="evenodd"></path></svg>
+                <h1>Welcome to Pinterest</h1>
+
+                <div class="inputbox">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                </div>
+
+                <div class="inputbox">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+
+                <a href="">Forgotten your Password?</a>
+
+                <div class="btn">
+                    <button type="submit">Login</button>
+                    <h5>OR</h5>
+                    <button type="button"><i class="fa-brands fa-facebook"></i> Continue with Facebook</button>
+                </div>
+                
+                <div class="toggle-form">
+                    Not on Pinterest yet? <a href="#" id="showRegister">Sign up</a>
+                </div>
+            </form>
+        </div>   
+    </section>
+
+    <!-- register page code -->
+    <section id="register">
+        <div class="registertext">
+            <h1>Join Pinterest to find ideas you'll love</h1>
+        </div>
+        <div class="registerform">
+            <form id="registerForm">
+                <svg aria-labelledby="fullpage-modal-pinterest-logo" height="40" role="img" viewBox="-3 -3 82 82" width="40" style="display: block;"><title id="fullpage-modal-pinterest-logo">Pinterest logo</title><circle cx="38" cy="38" fill="red" r="40"></circle><path d="M27.5 71c3.3 1 6.7 1.6 10.3 1.6C57 72.6 72.6 57 72.6 37.8 72.6 18.6 57 3 37.8 3 18.6 3 3 18.6 3 37.8c0 14.8 9.3 27.5 22.4 32.5-.3-2.7-.6-7.2 0-10.3l4-17.2s-1-2-1-5.2c0-4.8 3-8.4 6.4-8.4 3 0 4.4 2.2 4.4 5 0 3-2 7.3-3 11.4C35.6 49 38 52 41.5 52c6.2 0 11-6.6 11-16 0-8.3-6-14-14.6-14-9.8 0-15.6 7.3-15.6 15 0 3 1 6 2.6 8 .3.2.3.5.2 1l-1 3.8c0 .6-.4.8-1 .4-4.4-2-7-8.3-7-13.4 0-11 7.8-21 22.8-21 12 0 21.3 8.6 21.3 20 0 12-7.4 21.6-18 21.6-3.4 0-6.7-1.8-7.8-4L32 61.7c-.8 3-3 7-4.5 9.4z" fill="white" fill-rule="evenodd"></path></svg>
+                <h1>Welcome to Pinterest</h1>
+
+                <div class="inputbox">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" required>
+                </div>
+
+                <div class="inputbox">
+                    <label for="register-password">Create Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+
+                <div class="inputbox">
+                    <label for="register-age">Age</label>
+                    <input type="number" id="register-age" min="13" required>
+                </div>
+
+                <div class="btn">
+                    <button type="submit">Continue</button>
+                    <h5>OR</h5>
+                    <button type="button"><i class="fa-brands fa-facebook"></i> Continue with Facebook</button>
+                </div>
+                
+                <div class="toggle-form">
+                    Already a member? <a href="#" id="showLogin">Log in</a>
+                </div>
+            </form>
+        </div>   
+    </section>
+
+
+    <!-- About page -->
+    <section id="about">
+        <div class="abouttext">
+            <h1>About Our Pinterest Inspiration</h1>
+        </div>
+        <div class="aboutcontent">
+            <h2>About Me</h2>
+            <p>Hello! I'm a passionate creator who loves to share beautiful and inspiring content with the world. My Pinterest journey began as a way to organize my creative ideas, and it has grown into a platform where I can connect with like-minded individuals.</p>
+            <p>With a background in design and photography, I curate boards that showcase the best of nature, travel, fashion, and home decor. My goal is to inspire others to discover their creativity and find joy in the simple things.</p>
+            <p>When I'm not pinning, you can find me exploring new places, capturing moments with my camera, or experimenting with DIY projects at home.</p>
+        </div>
+    </section>
+
+    <!-- Business page -->
+    <section id="business">
+        <div class="businesstext">
+            <h1>Business Opportunities</h1>
+        </div>
+        <div class="businesscontent">
+            <h2>Business About Me</h2>
+            <p>As a Pinterest creator, I collaborate with brands and businesses to showcase products in authentic, inspiring ways. My business approach focuses on creating meaningful connections between brands and their target audiences.</p>
+            <p>Services I offer include:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Content creation and curation</li>
+                <li>Branded board management</li>
+                <li>Pinterest marketing strategy</li>
+                <li>Product photography for pins</li>
+            </ul>
+            <p>I believe in working with brands that align with my aesthetic and values. If you're interested in collaborating, please reach out through our contact page.</p>
+        </div>
+    </section>
+
+    <!-- Create page -->
+    <section id="create">
+        <div class="createtext">
+            <h1>My Creative Process</h1>
+        </div>
+        <div class="createcontent">
+            <h2>What I Create</h2>
+            <p>I specialize in creating visually stunning content that tells a story. My creations include:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Beautiful photography of nature and urban landscapes</li>
+                <li>Step-by-step DIY and craft tutorials</li>
+                <li>Mood boards for interior design inspiration</li>
+                <li>Travel guides with hidden gems</li>
+                <li>Fashion lookbooks for different seasons</li>
+            </ul>
+            <p>Each pin is carefully crafted to inspire and provide value to my audience. I focus on quality over quantity, ensuring that every piece of content I share is something I truly believe in.</p>
+            <p>My creative process begins with finding inspiration in everyday life, then translating that into content that others can use to spark their own creativity.</p>
+        </div>
+    </section>
+
+    <!-- News page -->
+    <section id="news">
+        <div class="newstext">
+            <h1>Latest Pinterest News</h1>
+        </div>
+        <div class="newscontent">
+            <h2>Beneficial Pinterest News</h2>
+            <p><strong>1. Pinterest Introduces New Creative Tools:</strong> Pinterest has recently launched a suite of new creative tools that allow users to design more engaging pins directly on the platform. These tools include advanced text options, templates, and collaborative features.</p>
+            <p><strong>2. Shopping Features Expanded:</strong> Pinterest continues to enhance its shopping experience with new features like AR try-on for home decor and fashion items, making it easier for users to visualize products before purchasing.</p>
+            <p><strong>3. Mental Wellness Initiatives:</strong> Pinterest has partnered with mental health organizations to create boards and resources focused on self-care, mindfulness, and emotional wellbeing, recognizing the platform's role in personal inspiration.</p>
+            <p><strong>4. Sustainability Focus:</strong> In response to user trends, Pinterest has highlighted eco-friendly and sustainable living content, making it easier to find ideas for reducing waste and living more consciously.</p>
+            <p><strong>5. Creator Rewards Program:</strong> Pinterest has expanded its creator monetization options with a new rewards program that compensates creators for generating engaging, original content on the platform.</p>
+        </div>
+    </section>
+
+    <!-- Board page (shown after login) -->
+    <section id="board">
+        <div class="search-bar">
+            <input type="text" placeholder="Search for ideas..." id="searchInput">
+        </div>
+        
+        <div class="welcome-message" id="welcomeMessage">
+            Welcome back, User!
+        </div>
+        
+        <div class="pins-container" id="pinsContainer">
+            <!-- Pins will be added here dynamically -->
+        </div>
+        
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+        
+        <div class="add-pin" id="addPinBtn">
+            <i class="fas fa-plus"></i>
+        </div>
+    </section>
+
+    <!-- Add Pin Modal -->
+    <div class="modal" id="addPinModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Add New Pin</h2>
+            <form id="addPinForm">
+                <input type="text" id="pinTitle" placeholder="Title" required>
+                <input type="url" id="pinImageUrl" placeholder="Image URL" required>
+                <textarea id="pinDescription" placeholder="Description"></textarea>
+                <button type="submit">Add Pin</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample pins data with more nature, beach and adventure images
+        const samplePins = [
+            {
+                title: "Mountain Sunrise",
+                imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Beautiful sunrise over mountain peaks"
+            },
+            {
+                title: "Tropical Beach",
+                imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "White sand and crystal clear water"
+            },
+            {
+                title: "Forest Adventure",
+                imageUrl: "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Mystical forest path for hiking"
+            },
+            {
+                title: "Waterfall Wonder",
+                imageUrl: "https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Majestic waterfall in the jungle"
+            },
+            {
+                title: " City Skyline",
+                imageUrl:"https://cdn.pixabay.com/photo/2015/11/23/03/20/city-1057678_1280.jpg",
+                description: "Urban cityscape with towering skyscrapers"
+            },
+            {
+                title: "Desert Dunes",
+                imageUrl: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Endless sand dunes at sunset"
+            },
+            {
+                title: "Ocean Waves",
+                imageUrl: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Powerful ocean waves crashing"
+            },
+            {
+                title: "Mountain Climbing",
+                imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Adventurous mountain climbing"
+            },
+            {
+                title: "Autumn Forest",
+                imageUrl: "https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Colorful autumn forest path"
+            },
+            {
+                title: "Cliff Diving",
+                imageUrl: "https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Extreme cliff diving adventure"
+            },
+            {
+                title: "Northern Lights",
+                imageUrl: "https://images.hdqwalls.com/wallpapers/northern-lights-night-sky-mountains-landscape-4k-k8.jpg",
+                description: "Aurora borealis in the night sky"
+            },
+            {
+                title: "Coral Reef",
+                imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Colorful underwater coral reef"
+            },
+            {
+                title: "Camping Under Stars",
+                imageUrl: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                description: "Tent under the starry night sky"
+            }
+        ];
+
+        // Current user and registered users
+        let currentUser = null;
+        let registeredUsers = [];
+        let userPins = [...samplePins];
+
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const addPinBtn = document.getElementById('addPinBtn');
+        const addPinModal = document.getElementById('addPinModal');
+        const closeModal = document.getElementById('closeModal');
+        const addPinForm = document.getElementById('addPinForm');
+        const pinsContainer = document.getElementById('pinsContainer');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const searchInput = document.getElementById('searchInput');
+        const alertMessage = document.getElementById('alertMessage');
+        const aboutLink = document.getElementById('aboutLink');
+        const businessLink = document.getElementById('businessLink');
+        const createLink = document.getElementById('createLink');
+        const newsLink = document.getElementById('newsLink');
+        const exploreBtn = document.getElementById('exploreBtn');
+        const mainLogo = document.getElementById('mainLogo');
+
+        // Show alert message
+        function showAlert(message) {
+            alertMessage.textContent = message;
+            alertMessage.style.display = 'block';
+            setTimeout(() => {
+                alertMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        // Hide all sections
+        function hideAllSections() {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('board').style.display = 'none';
+            document.getElementById('about').style.display = 'none';
+            document.getElementById('business').style.display = 'none';
+            document.getElementById('create').style.display = 'none';
+            document.getElementById('news').style.display = 'none';
+        }
+
+        // Toggle between login and register forms
+        showRegister.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('register').style.display = 'flex';
+        });
+
+        showLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('login').style.display = 'flex';
+        });
+
+        // Navigation buttons functionality
+        loginBtn.addEventListener('click', function() {
+            hideAllSections();
+            document.getElementById('login').style.display = 'flex';
+            // Clear URL hash
+            window.location.hash = '';
+        });
+
+        signupBtn.addEventListener('click', function() {
+            hideAllSections();
+            document.getElementById('register').style.display = 'flex';
+            // Clear URL hash
+            window.location.hash = '';
+        });
+
+        // Main logo click
+        mainLogo.addEventListener('click', function() {
+            if (currentUser) {
+                hideAllSections();
+                document.getElementById('board').style.display = 'block';
+            } else {
+                hideAllSections();
+                document.getElementById('login').style.display = 'flex';
+            }
+            // Clear URL hash
+            window.location.hash = '';
+        });
+
+        // Explore button click
+        exploreBtn.addEventListener('click', function() {
+            if (currentUser) {
+                hideAllSections();
+                document.getElementById('board').style.display = 'block';
+                renderPins(userPins);
+            } else {
+                showAlert('Please login first to explore pins');
+            }
+        });
+
+        // About link click
+        aboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('about').style.display = 'flex';
+            window.location.hash = 'about';
+        });
+
+        // Business link click
+        businessLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('business').style.display = 'flex';
+            window.location.hash = 'business';
+        });
+
+        // Create link click
+        createLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('create').style.display = 'flex';
+            window.location.hash = 'create';
+        });
+
+        // News link click
+        newsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('news').style.display = 'flex';
+            window.location.hash = 'news';
+        });
+
+        // Login form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Check if user is registered
+            const userExists = registeredUsers.some(user => user.email === email);
+            
+            if (!userExists) {
+                showAlert('You are not registered. Please sign up first.');
+                hideAllSections();
+                document.getElementById('register').style.display = 'flex';
+                return;
+            }
+            
+            // Simple validation
+            if (email && password) {
+                currentUser = email;
+                welcomeMessage.textContent = `Welcome back, ${email.split('@')[0]}!`;
+                
+                // Hide URL by refreshing without showing address
+                window.location.replace("#");
+                
+                // Show board page
+                hideAllSections();
+                document.getElementById('board').style.display = 'block';
+                
+                // Load pins
+                renderPins(userPins);
+                //Reset login form fields after successful login
+                loginForm.reset();
+            } else {
+                showAlert('Please enter both email and password');
+            }
+        });
+
+        // Register form submission
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const age = document.getElementById('register-age').value;
+            
+            // Simple validation
+            if (email && password && age) {
+                if (age < 13) {
+                    showAlert('You must be at least 13 years old to register');
+                    return;
+                }
+                
+                // Add to registered users
+                registeredUsers.push({ email, password, age });
+                
+                // Show success message and redirect to login
+                showAlert('Registration successful! Please login to continue');
+                hideAllSections();
+                document.getElementById('login').style.display = 'flex';
+                
+                // Clear form fields
+                registerForm.reset();
+            } else {
+                showAlert('Please fill in all fields');
+            }
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', function() {
+            currentUser = null;
+            hideAllSections();
+            document.getElementById('login').style.display = 'flex';
+            
+            // Clear form fields
+            loginForm.reset();
+            registerForm.reset();
+            
+            // Clear URL hash
+            window.location.hash = '';
+        });
+
+        // Add Pin button click
+        addPinBtn.addEventListener('click', function() {
+            if (!currentUser) {
+                showAlert('Please login to add pins');
+                return;
+            }
+            addPinModal.style.display = 'flex';
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            addPinModal.style.display = 'none';
+        });
+
+        // Add Pin form submission
+        addPinForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('pinTitle').value;
+            const imageUrl = document.getElementById('pinImageUrl').value;
+            const description = document.getElementById('pinDescription').value;
+            
+            if (title && imageUrl) {
+                const newPin = {
+                    title,
+                    imageUrl,
+                    description: description || "No description"
+                };
+                
+                userPins.unshift(newPin);
+                renderPins(userPins);
+                addPinForm.reset();
+                addPinModal.style.display = 'none';
+            } else {
+                showAlert('Please provide at least a title and image URL');
+            }
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            if (searchTerm) {
+                const filteredPins = userPins.filter(pin => 
+                    pin.title.toLowerCase().includes(searchTerm) || 
+                    pin.description.toLowerCase().includes(searchTerm)
+                );
+                renderPins(filteredPins);
+            } else {
+                renderPins(userPins);
+            }
+        });
+
+        // Render pins to the board
+        function renderPins(pins) {
+            pinsContainer.innerHTML = '';
+            
+            if (pins.length === 0) {
+                pinsContainer.innerHTML = '<p style="text-align: center; width: 100%;">No pins found. Try a different search or add a new pin!</p>';
+                return;
+            }
+            
+            pins.forEach(pin => {
+                const pinElement = document.createElement('div');
+                pinElement.className = 'pin';
+                pinElement.innerHTML = `
+                    <img src="${pin.imageUrl}" alt="${pin.title}">
+                    <div class="pin-info">
+                        <h3>${pin.title}</h3>
+                        <p>${pin.description}</p>
+                    </div>
+                `;
+                pinsContainer.appendChild(pinElement);
+            });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === addPinModal) {
+                addPinModal.style.display = 'none';
+            }
+        });
+
+        // Handle hash changes for navigation
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash === 'about') {
+                hideAllSections();
+                document.getElementById('about').style.display = 'flex';
+            } else if (hash === 'business') {
+                hideAllSections();
+                document.getElementById('business').style.display = 'flex';
+            } else if (hash === 'create') {
+                hideAllSections();
+                document.getElementById('create').style.display = 'flex';
+            } else if (hash === 'news') {
+                hideAllSections();
+                document.getElementById('news').style.display = 'flex';
+            }
+        });
+
+        // Initialize with login page
+        hideAllSections();
+        document.getElementById('login').style.display = 'flex';
+    </script>
+</body>
+</html>
